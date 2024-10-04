@@ -9,3 +9,14 @@ def find_min(array)
   return min
 end
 
+# Метод для поиска максимального элемента массива
+def find_max(array)
+  max = array[0]
+  for i in 1...array.length
+    if array[i] > max
+      max = array[i]
+    end
+  end
+  return max
+end
+
