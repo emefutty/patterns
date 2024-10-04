@@ -15,3 +15,9 @@ when "javascript"
 else
  puts "Скоро будет Ruby!"
 end
+
+puts "Введите команду Ruby:"
+eval(STDIN.gets.chomp)
+
+puts "Введите команду ОС:"
+system(STDIN.gets.chomp)
