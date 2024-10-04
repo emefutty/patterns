@@ -19,6 +19,22 @@ def max_prime_divisor(number)
   max_prime
 end
 
+#2.Найти произведение цифр числа, не делящихся на 5.
+
+def product_of_digits_not_divisible_by_five(number)
+  product = 1
+  #Пока число существует выполняем алгоритм подсчета
+  while(number != 0) do
+    last_digit = number % 10 #Выбираем последнюю цифру
+    if(last_digit % 5 != 0) #Проверяем делится лм число на 5
+      product *= last_digit #Если нет, умножаем на произведение
+    end
+    number /= 10 #Избавляемся от последней цифры числа
+  end
+  return product
+end
+
 puts "Введите число:"
 number = gets.to_i 
+puts "Произведение цифр числа #{number}, не делящихся на 5: #{product_of_digits_not_divisible_by_five(number)}"
 puts "Максимальный простой делитель числа #{number}: #{max_prime_divisor(number)}"
