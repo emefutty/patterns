@@ -17,10 +17,11 @@ student2=Student.new(
 	second_name:"Васильевич", 
 	id:2, 
 	phone:"+79999999998", 
-	telegram:"@bbbb",
+	telegram:"@bbbbb",
 	mail:"petrov@mail.ru", 
 	git:"https://github.com/git2"
 )
 
 puts student1
 puts student2
+puts student1.validate?
