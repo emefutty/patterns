@@ -1,17 +1,17 @@
 class Student
 	attr_reader :id, :surname, :first_name, :second_name, :phone, :telegram, :mail, :git
 
-	def initialize(args = {id:, surname:, first_name:, second_name:, phone:, telegram:, mail:, git: })
-    	self.surname=args[:surname] 
-    	self.first_name=args[:first_name] 
-    	self.second_name=args[:second_name] 
-    	@id=args[:id] 
-    	self.phone = args[:phone] 
-    	self.telegram = args[:telegram]
-    	self.mail = args[:mail]
-    	self.git = args[:git] 
-	end
+	def initialize(args = {surname:, first_name:, second_name:, id: nil,  phone: nil, telegram: nil, mail: nil, git: nil })
+    	self.surname = args[:surname] 
+    	self.first_name = args[:first_name] 
+    	self.second_name = args[:second_name] 
+    	@id = args[:id]
+    	self.git = args[:git]
 
+    	set_contacts(phone: args[:phone], telegram: args[:telegram], mail: args[:mail]) if args[:phone] || args[:telegram] || args[:mail]
+    end
+
+    	
 	def self.validate_phone?(phone) 
     	phone =~ /\A\+?\d{10,}\z/
   	end
@@ -85,6 +85,19 @@ class Student
 	def validate?
 		git_present? && contact_present?
 	end
+
+	def set_contacts(phone: nil, mail: nil, telegram: nil)
+    	self.phone = phone if phone
+    	self.telegram = telegram if telegram
+    	self.mail = mail if mail
+  	end
+
+  	def contact    
+    	return "Телефон: #{@phone}" if @phone
+    	return "Почта: #{@mail}" if @mail
+    	return "Телеграм: #{@telegram}" if @telegram
+    	nil
+  	end
 
 	def to_s
 		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@second_name},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@mail}, GitHub: #{@git}"
