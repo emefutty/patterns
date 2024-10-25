@@ -1,21 +1,28 @@
 class Student
-	attr_accessor :id, :surname, :first_name, :second_name, :phone, :telegram, :mail, :git
-#Функция инициализации
-	def initialize(args = {})
-		#Проверка обязательных полей
-    	@surname=args[:surname] or raise 'Пожалуйста, введите фамилию'
-    	@first_name=args[:first_name] or raise 'Пожалуйста, введите имя'
-    	@second_name=args[:second_name] or raise 'Пожалуйста, введите отчество'
-    	# Инициализация необязательных полей
+	attr_reader :id, :surname, :first_name, :second_name, :phone, :telegram, :mail, :git
+
+	def initialize(args = {id:, surname:, first_name:, second_name:, phone:, telegram:, mail:, git: })
+    	@surname=args[:surname] 
+    	@first_name=args[:first_name] 
+    	@second_name=args[:second_name] 
     	@id=args[:id] 
-    	@phone=args[:phone] 
+    	self.phone = args[:phone] 
     	@telegram=args[:telegram] 
     	@mail=args[:mail] 
     	@git=args[:git] 
 	end
 
+	def self.validate_phone?(phone) 
+    	phone =~ /\A\+?\d{10,}\z/
+  	end
+
+  	def phone=(phone)
+  		raise "Пожалуйста, введите корректный номер телефона" if !Student.validate_phone?(phone)
+  		@phone=phone
+  	end
+
 	def to_s
-		"ID: #{@id || 'Не указано'}, ФИО: #{@surname} #{@first_name} #{@second_name},  Телефон: #{@phone || 'Не указано'}, Телеграм: #{@telegram || 'Не указано'}, Почта: #{@mail || 'Не указано'}, GitHub: #{@git || 'Не указано'}"
+		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@second_name},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@mail}, GitHub: #{@git}"
 	end
 
 end
