@@ -99,6 +99,14 @@ class Student
     	nil
   	end
 
+	def surname_initials
+		"#{surname} #{first_name[0]}.#{second_name[0]}."
+	end
+
+	def get_info
+		"#{surname_initials}; Git: #{git}, Связь: #{contact}"
+	end
+
 	def to_s
 		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@second_name},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@mail}, GitHub: #{@git}"
 	end

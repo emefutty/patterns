@@ -25,3 +25,4 @@ student2=Student.new(
 puts student1
 puts student2
 puts student1.validate?
+puts student2.get_info
