@@ -21,17 +21,13 @@ class Student < Person
   		@phone=phone
   	end
 
-  	def self.valid_surname?(surname)
-    	surname =~ /\A[А-Яа-яA-Za-z]+\z/
+  	def self.valid_name?(name)
+    	name =~ /\A[А-Яа-яA-Za-z]+\z/
   	end
 
   	def surname=(surname)
-    	raise "Фамилия должна содержать только буквы" if !Student.valid_surname?(surname)
+    	raise "Фамилия должна содержать только буквы" if !Student.valid_name?(surname)
     	@surname = surname
-  	end
-
-  	def self.valid_first_name?(first_name)
-    	first_name =~ /\A[А-Яа-яA-Za-z]+\z/
   	end
 
   	def first_name=(first_name)
@@ -39,12 +35,8 @@ class Student < Person
     	@first_name = first_name
   	end
 
-  	def self.valid_patronymic?(patronymic)
-    	patronymic =~ /\A[А-Яа-яA-Za-z]+\z/
-  	end
-
   	def patronymic=(patronymic)
-    	raise "Отчество должно содержать только буквы" if !Student.valid_patronymic?(patronymic)
+    	raise "Отчество должно содержать только буквы" if !Student.valid_name?(patronymic)
     	@patronymic = patronymic
   	end
 

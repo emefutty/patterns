@@ -29,4 +29,3 @@ puts student1
 student_short = StudentShort.from_student(student1) 
 puts student_short
 
-sts = StudentShort.new("Иванов А.И.", 1, "https://github.com/git2", "@abcs" ) # => error
