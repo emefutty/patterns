@@ -1,114 +1,93 @@
-class Student
-	attr_reader :id, :surname, :first_name, :second_name, :phone, :telegram, :mail, :git
+require_relative 'person'
+class Student < Person
 
-	def initialize(args = {surname:, first_name:, second_name:, id: nil,  phone: nil, telegram: nil, mail: nil, git: nil })
-    	self.surname = args[:surname] 
-    	self.first_name = args[:first_name] 
-    	self.second_name = args[:second_name] 
-    	@id = args[:id]
-    	self.git = args[:git]
+	attr_reader :surname, :first_name, :patronymic, :phone, :telegram, :email
 
-    	set_contacts(phone: args[:phone], telegram: args[:telegram], mail: args[:mail]) if args[:phone] || args[:telegram] || args[:mail]
-    end
+	def initialize(surname:, first_name:, patronymic:, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+	    self.surname = surname
+	    self.first_name = first_name
+	    self.patronymic = patronymic
 
-    	
-	def self.validate_phone?(phone) 
+	    set_contacts(phone: phone, telegram: telegram, email: email)
+	    super(id: id, git: git)
+  	end
+
+	def self.valid_phone?(phone) 
     	phone =~ /\A\+?\d{10,}\z/
   	end
 
   	def phone=(phone)
-  		raise "Пожалуйста, введите корректный номер телефона" if !Student.validate_phone?(phone)
+  		raise "Пожалуйста, введите корректный номер телефона" if !Student.valid_phone?(phone)
   		@phone=phone
   	end
 
-  	def self.validate_surname?(surname)
+  	def self.valid_surname?(surname)
     	surname =~ /\A[А-Яа-яA-Za-z]+\z/
   	end
 
   	def surname=(surname)
-    	raise "Фамилия должна содержать только буквы" if !Student.validate_surname?(surname)
+    	raise "Фамилия должна содержать только буквы" if !Student.valid_surname?(surname)
     	@surname = surname
   	end
 
-  	def self.validate_first_name?(first_name)
+  	def self.valid_first_name?(first_name)
     	first_name =~ /\A[А-Яа-яA-Za-z]+\z/
   	end
 
   	def first_name=(first_name)
-    	raise "Имя должно содержать только буквы" if !Student.validate_first_name?(first_name)
+    	raise "Имя должно содержать только буквы" if !Student.valid_name?(first_name)
     	@first_name = first_name
   	end
 
-  	def self.validate_second_name?(second_name)
-    	second_name =~ /\A[А-Яа-яA-Za-z]+\z/
+  	def self.valid_patronymic?(patronymic)
+    	patronymic =~ /\A[А-Яа-яA-Za-z]+\z/
   	end
 
-  	def second_name=(second_name)
-    	raise "Отчество должно содержать только буквы" if !Student.validate_second_name?(second_name)
-    	@second_name = second_name
+  	def patronymic=(patronymic)
+    	raise "Отчество должно содержать только буквы" if !Student.valid_patronymic?(patronymic)
+    	@patronymic = patronymic
   	end
 
-  	def self.validate_telegram?(telegram)
+  	def self.valid_telegram?(telegram)
     	telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/
   	end
 
   	def telegram=(telegram)
-    	raise "Некорректное имя пользователя в Telegram" if !Student.validate_telegram?(telegram)
+    	raise "Некорректное имя пользователя в Telegram" if !Student.valid_telegram?(telegram)
     	@telegram = telegram
   	end
 
-  	def self.validate_mail?(mail)
-    	mail =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  	def self.valid_email?(email)
+    	email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   	end
 
-  	def mail=(mail)
-    	raise "Некорректный формат email" if !Student.validate_mail?(mail)
-    	@mail = mail
+  	def email=(email)
+    	raise "Некорректный формат eemail" if !Student.valid_email?(email)
+    	@email = email
   	end
 
-  	def self.validate_git?(git)
-    	git =~ /\Ahttps:\/\/github\.com\/[a-zA-Z0-9_-]+\z/
-  	end
-
-  	def git=(git)
-    	raise "Некорректный формат GitHub URL" if !Student.validate_git?(git)
-    	@git = git
-  	end
-  	def git_present?
-  		!git.nil?
-	end
-
-	def contact_present?
-		!phone.nil? || !email.nil? || !telegram.nil?
-	end  
-
-	def validate?
-		git_present? && contact_present?
-	end
-
-	def set_contacts(phone: nil, mail: nil, telegram: nil)
+	def set_contacts(phone: nil, email: nil, telegram: nil)
     	self.phone = phone if phone
     	self.telegram = telegram if telegram
-    	self.mail = mail if mail
+    	self.email = email if email
   	end
 
   	def contact    
     	return "Телефон: #{@phone}" if @phone
-    	return "Почта: #{@mail}" if @mail
+    	return "Почта: #{@email}" if @email
     	return "Телеграм: #{@telegram}" if @telegram
-    	nil
   	end
 
 	def surname_initials
-		"#{surname} #{first_name[0]}.#{second_name[0]}."
+		"#{surname} #{first_name[0]}.#{patronymic[0]}."
 	end
 
 	def get_info
-		"#{surname_initials}; Git: #{git}, Связь: #{contact}"
+		"#{surname_initials}, Git: #{git}, Связь: #{contact}"
 	end
 
 	def to_s
-		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@second_name},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@mail}, GitHub: #{@git}"
+		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@patronymic},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, GitHub: #{@git}"
 	end
 
 end
