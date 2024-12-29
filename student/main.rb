@@ -25,7 +25,7 @@ student2=Student.new(
 )
 
 puts student1
-
 student_short = StudentShort.from_student(student1) 
 puts student_short
-
+# aa=StudentShort.from_string(1, "Иванов И.И., https://github.com/ivanov, +79999999999")
+# puts aa

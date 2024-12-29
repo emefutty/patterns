@@ -15,7 +15,7 @@ class Person
 	def self.valid_id?(id)
 		id.is_a?(Integer) && id > 0
 	end
-
+	
 	def git=(git)
 		raise ArgumentError, "Неверный формат гита" unless Person.valid_git?(git)
 		@git = git
@@ -24,18 +24,6 @@ class Person
 	def id=(id)
 		raise ArgumentError, "Неверный формат ID" unless Person.valid_id?(id)
 		@id = id
-	end
-
-	def has_git?
-		!@github.nil?
-	end
-	  
-	def has_contact?
-		!@telegram.nil? || !@phone.nil? || !@email.nil?
-	end
-	  
-	def validate?
-		has_contact? && has_git?   
 	end
 
 	def self.valid_surname?(surname)
