@@ -70,24 +70,16 @@ class Student < Person
     	return "Телеграм: #{@telegram}" if @telegram
   	end
 
-  	def has_git?
-		!@github.nil?
-	end
-
-  	def has_contact?
-		!@telegram.nil? || !@phone.nil? || !@email.nil?
-	end
-	  
-	def validate?
-		has_contact? && has_git?   
-	end
-
 	def surname_initials
 		"#{surname} #{first_name[0]}.#{patronymic[0]}."
 	end
 
 	def get_info
 		"#{surname_initials}, Git: #{git}, Связь: #{contact}"
+	end
+
+	def has_contact?
+		!@telegram.nil? || !@phone.nil? || !@email.nil?
 	end
 
 	def to_s

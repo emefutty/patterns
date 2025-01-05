@@ -15,7 +15,7 @@ class Person
 	def self.valid_id?(id)
 		id.is_a?(Integer) && id > 0
 	end
-	
+
 	def git=(git)
 		raise ArgumentError, "Неверный формат гита" unless Person.valid_git?(git)
 		@git = git
@@ -25,6 +25,18 @@ class Person
 		raise ArgumentError, "Неверный формат ID" unless Person.valid_id?(id)
 		@id = id
 	end
+
+	def has_git?
+		!@git.nil?
+	end
+	  
+	def validate?
+		has_contact? && has_git?   
+	end
+
+	def has_contact?
+    	raise NotImplementedError, "Метод должен быть реализован в дочернем классе"
+ 	end
 
 	def self.valid_surname?(surname)
 		raise NotImplementedError, "Метод не реализован в классе Person"
@@ -49,4 +61,5 @@ class Person
 	def self.valid_email?(email)
 		raise NotImplementedError, "Метод не реализован в классе Person"  
 	end
+
 end
