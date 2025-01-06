@@ -1,13 +1,15 @@
 require_relative 'person'
+require 'date'
+
 class Student < Person
+	include Comparable
+	attr_reader :surname, :first_name, :patronymic, :birthdate, :phone, :telegram, :email
 
-	attr_reader :surname, :first_name, :patronymic, :phone, :telegram, :email
-
-	def initialize(surname:, first_name:, patronymic:, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+	def initialize(surname:, first_name:, patronymic:, birthdate:nil, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
 	    self.surname = surname
 	    self.first_name = first_name
 	    self.patronymic = patronymic
-
+	    self.birthdate = birthdate
 	    set_contacts(phone: phone, telegram: telegram, email: email)
 	    super(id: id, git: git)
   	end
@@ -39,6 +41,16 @@ class Student < Person
     	raise "Отчество должно содержать только буквы" if !Student.valid_name?(patronymic)
     	@patronymic = patronymic
   	end
+
+  	def birthdate=(birthdate)
+		if birthdate.is_a?(Date)
+			@birthdate = birthdate
+		elsif birthdate.is_a?(String)
+			@birthdate = Date.parse(birthdate)
+		else
+			raise ArgumentError, "Некорректная дата рождения"
+		end
+	end
 
   	def self.valid_telegram?(telegram)
     	telegram =~ /\A@[a-zA-Z0-9_]{5,}\z/
@@ -82,8 +94,12 @@ class Student < Person
 		!@telegram.nil? || !@phone.nil? || !@email.nil?
 	end
 
+	def <=>(other)
+		birthdate <=> other.birthdate
+	end
+
 	def to_s
-		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@patronymic},  Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, GitHub: #{@git}"
+		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@patronymic}, Дата рождения: #{birthdate}, Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, GitHub: #{@git}"
 	end
 
 end
