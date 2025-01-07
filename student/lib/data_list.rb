@@ -1,30 +1,60 @@
 class DataList
-  private attr_reader :data
+  private attr_reader :data :column_names
   private attr_accessor :selected
 
-  def initialize(data)
+  def initialize(data, column_names = [])
     self.data = data
+    self.column_names = column_names
     @selected = []
   end
 
-  private def data=(data)
-    unless data.is_a?(Array)
-      raise ArgumentError, "Объект должен являться двумерным массивом"
-    end
-    @data = data
+  def set_data(new_data)
+    raise ArgumentError, "Объект должен являться массивом" unless new_data.is_a?(Array)
+    self.data = new_data
   end
+
   def select(number)
-    if number.between?(0, data.length - 1)
-      selected << number
-    end
+    raise ArgumentError, "Индекс выходит за пределы" unless number.between?(0, data.length - 1)
+    selected << number
   end
+
   def get_selected
     selected
   end
-  def get_names
+
+   def build_table
+    [get_columns] + get_data
+  end
+
+  def get_columns
+    column_names
+  end
+
+  def get_data
+    get_objects_array
+  end
+
+  def size
+    @data.size
+  end
+  
+  private
+
+  def data=(data)
+    raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
+    @data = data
+  end
+
+  def column_names=(names)
+      raise ArgumentError, "Наименования столбцов не могут быть изменены" unless @column_names.nil?
+      @column_names = names
+    end
+
+  def column_names
     raise NotImplementedError, "Метод не реализован в классе"
   end
-  def get_data
+
+  def get_objects_array
     raise NotImplementedError, "Метод не реализован в классе"
   end
 end
