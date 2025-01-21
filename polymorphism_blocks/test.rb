@@ -62,12 +62,7 @@ end
     assert_equal(expected, array.chunk { |num| num.even? })
 
     array = ArrayProcessor.new(["red", "blue", "blue", "red", "green"])
-    expected = [
-      ["r", ["red"]],
-      ["b", ["blue", "blue"]],
-      ["r", ["red"]],
-      ["g", ["green"]]
-    ]
+    expected = [["r", ["red"]], ["b", ["blue", "blue"]], ["r", ["red"]], ["g", ["green"]]]
     assert_equal(expected, array.chunk { |word| word[0] })
 
     array = ArrayProcessor.new([])

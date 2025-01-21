@@ -23,10 +23,14 @@ class ArrayProcessor
   end
 
   def reduce(initial = nil)
-    result = initial.nil? ? @arr.first : initial
-    start_index = initial.nil? ? 1 : 0
-    @arr[start_index..-1].each { |element| result = yield(result, element) }
-    result
+     accumulator = initial
+    if accumulator.nil?
+        accumulator = 0
+    end
+    @arr.each do |element|
+        accumulator = yield accumulator, element
+    end
+    return accumulator
   end
 
   def include?(value)
@@ -42,18 +46,16 @@ class ArrayProcessor
     @arr.each do |element|
       key = yield(element)
 
-      if current_chunk.empty? || key == current_key
-        current_chunk << element
-      else
-        result << [current_key, current_chunk]
-        current_chunk = [element]
+      if key != current_key
+        result << [current_key, current_chunk] unless current_chunk.empty?
+        current_key = key
+        current_chunk = []
       end
 
-      current_key = key
+      current_chunk << element
     end
     result << [current_key, current_chunk] unless current_chunk.empty?
     result
     end
-
-
+    
 end

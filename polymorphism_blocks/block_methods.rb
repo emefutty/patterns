@@ -9,7 +9,7 @@ def elements_after_first_max(arr)
 end
 
 def alternating_signs?(arr)
-  arr[1..-1].zip(arr[0..-2]).all? { |a, b| a * b < 0 }
+  (0...arr.size - 1).all? { |i| arr[i] * arr[i + 1] < 0 }
 end
 
 def sum_in_interval(arr, a, b)
