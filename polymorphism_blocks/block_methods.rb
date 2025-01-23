@@ -17,7 +17,11 @@ def sum_in_interval(arr, a, b)
 end
 
 def count_greater_than_sum_previous(arr)
-  arr[1..-1].map.with_index { |num, i| num > arr[0..i].sum }.count(true)
+  result = (1...arr.size).map do |i| 
+    arr[i] > arr[0...i].sum
+  end
+
+  result.count(true)  
 end
 
 def input_array
