@@ -1,5 +1,6 @@
 class DataList
-  private attr_reader :data :column_names
+  
+  private attr_reader :data, :column_names
   private attr_accessor :selected
 
   def initialize(data, column_names = [])
@@ -22,11 +23,11 @@ class DataList
     selected
   end
 
-   def build_table
-    [get_columns] + get_data
+  def build_table
+    [get_names] + get_data
   end
 
-  def get_columns
+  def get_names
     column_names
   end
 
@@ -34,10 +35,6 @@ class DataList
     get_objects_array
   end
 
-  def size
-    @data.size
-  end
-  
   private
 
   def data=(data)
@@ -48,7 +45,7 @@ class DataList
   def column_names=(names)
       raise ArgumentError, "Наименования столбцов не могут быть изменены" unless @column_names.nil?
       @column_names = names
-    end
+  end
 
   def column_names
     raise NotImplementedError, "Метод не реализован в классе"
@@ -57,4 +54,5 @@ class DataList
   def get_objects_array
     raise NotImplementedError, "Метод не реализован в классе"
   end
+
 end

@@ -1,9 +1,14 @@
-require './data_list.rb'
-require './data_table.rb'
+require_relative 'data_list'
+require_relative 'data_table'
+
 class DataListStudentShort < DataList
-  def get_names
+
+  private
+
+  def column_names
     ["№", "Фамилия И.О.", "git", "Контакт"]
   end
+
   def get_objects_array
     raise ArgumentError, "Данные отсутствуют" if data.empty?
     data.map.with_index(1) do |object, index|

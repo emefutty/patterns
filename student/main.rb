@@ -2,6 +2,9 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'student_short'
 require_relative 'student_tree'
+require_relative './lib/data_table'
+require_relative './lib/data_list'
+require_relative './lib/data_list_student_short'
 
 student1=Student.new(       
 	surname:"Иванов", 
@@ -45,10 +48,42 @@ student3=Student.new(
 # aa=StudentShort.from_string(1, "Иванов И.И., https://github.com/ivanov, +79999999999")
 # puts aa
 
-tree = StudentTree.new
-tree.insert(student1)
-tree.insert(student2)
-tree.insert(student3)
+# tree = StudentTree.new
+# tree.insert(student1)
+# tree.insert(student2)
+# tree.insert(student3)
 
-puts "\nДаты рождения студентов по возрастанию:"
-tree.each { |student| puts student }
+# puts "\nДаты рождения студентов по возрастанию:"
+# tree.each { |student| puts student }
+
+
+
+# testdata = DataTable.new([[1,2,3],[4,5,6]])
+
+# puts testdata.inspect
+# puts testdata.rows_count
+# puts testdata.columns_count
+# puts testdata.get_element(1,2)
+
+# list = DataList.new([10, 20, 30])
+# puts list.inspect 
+# list.select(1)
+# list.select(2)
+# puts list.get_selected 
+
+student_short1 = StudentShort.from_student(student1)
+
+
+data_list = DataListStudentShort.new([student_short1])
+
+puts "До замены данных:"
+puts data_list.get_names.join(", ")
+puts data_list.get_data.inspect
+
+new_student_short1 = StudentShort.from_student(student3)
+
+new_data_list = DataListStudentShort.new([new_student_short1])
+
+puts "\nПосле замены данных:"
+puts data_list.get_names.join(", ")
+puts new_data_list.get_data.inspect
