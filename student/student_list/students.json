@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "surname": "Сергеев",
+    "first_name": "Александр",
+    "patronymic": "Иванович",
+    "git": "https://github.com/ivanov",
+    "birthdate": "12.01.2005",
+    "phone": "12345678901",
+    "email": "ivanov@example.com",
+    "telegram": "@alexsiv"
+  },
+  {
+    "id": 2,
+    "surname": "Иванов",
+    "first_name": "Иван",
+    "patronymic": "Иванович",
+    "git": "https://github.com/ivanov",
+    "birthdate": "01.11.2002",
+    "phone": "89123456789",
+    "email": "ivanov@mail.com",
+    "telegram": "@ivanov"
+  },
+  {
+    "id": 3,
+    "surname": "Антонов",
+    "first_name": "Антон",
+    "patronymic": "Антонович",
+    "git": "https://github.com/antonov",
+    "birthdate": "17.04.2004",
+    "phone": "12345678901",
+    "email": "antonov@example.com",
+    "telegram": "@antoto"
+  }
+]

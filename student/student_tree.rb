@@ -1,4 +1,4 @@
-require_relative 'student'
+require_relative './model/student'
 
 class StudentTree
 	include Enumerable
