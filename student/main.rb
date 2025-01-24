@@ -6,7 +6,9 @@ require_relative './lib/data_table'
 require_relative './lib/data_list'
 require_relative './lib/data_list_student_short'
 require_relative './student_list/students_list_json'
+require_relative './student_list/students_list_yaml'
 require 'json'
+require 'yaml'
 
 # student1=Student.new(       
 # 	surname:"Иванов", 
@@ -92,7 +94,7 @@ require 'json'
 
 
 
-students_list = StudentsListJSON.new(filepath: './student_list/students.json')
+students_list = StudentsListYAML.new(filepath: './student_list/students.yaml')
 students_list.read_from_file
 
 if students_list.students.nil? || students_list.students.empty?
