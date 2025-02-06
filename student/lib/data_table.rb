@@ -13,11 +13,11 @@ class DataTable
   end
 
   def rows_count
-    data.size
+    @data.size
   end
 
   def columns_count
-    data[0].size
+    @data[0].size
   end
 
   def get_element(row,col)
