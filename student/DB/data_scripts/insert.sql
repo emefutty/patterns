@@ -1,0 +1,22 @@
+INSERT INTO studentsDB (id, surname, first_name, patronymic, birthdate, phone, telegram, email, git)
+VALUES
+(1, 'Иванов', 'Иван', 'Иванович', '2003-03-05', '+79991112233', '@ivanov_ii', 'ivanov@mail.ru', 'https://github.com/ivanovii'),
+(2, 'Петров', 'Алексей', 'Сергеевич', '2004-06-12', '+79992223344', '@petrov_as', 'petrov@mail.ru', 'https://github.com/petrov_as'),
+(3, 'Сидоров', 'Николай', 'Андреевич', '2002-11-23', '+79993334455', '@sidorov_na', 'sidorov@mail.ru', 'https://github.com/sidorov_na'),
+(4, 'Кузнецов', 'Дмитрий', 'Владимирович', '2005-02-15', '+79994445566', '@kuznetsov_dv', 'kuznetsov@mail.ru', 'https://github.com/kuznetsov_dv'),
+(5, 'Попов', 'Владимир', 'Игоревич', '2001-09-07', '+79995556677', '@popov_vi', 'popov@mail.ru', 'https://github.com/popov_vi'),
+(6, 'Смирнов', 'Олег', 'Петрович', '2003-07-20', '+79996667788', '@smirnov_op', 'smirnov@mail.ru', 'https://github.com/smirnov_op'),
+(7, 'Васильев', 'Сергей', 'Александрович', '2002-12-01', '+79997778899', '@vasiliev_sa', 'vasiliev@mail.ru', 'https://github.com/vasiliev_sa'),
+(8, 'Михайлов', 'Антон', 'Геннадьевич', '2004-05-18', '+79998889900', '@mikhailov_ag', 'mikhailov@mail.ru', 'https://github.com/mikhailov_ag'),
+(9, 'Фёдоров', 'Георгий', 'Леонидович', '2005-08-22', '+79999990011', '@fedorov_gl', 'fedorov@mail.ru', 'https://github.com/fedorov_gl'),
+(10, 'Семенов', 'Евгений', 'Дмитриевич', '2003-01-10', '+79990001122', '@semenov_ed', 'semenov@mail.ru', 'https://github.com/semenov_ed'),
+(11, 'Егоров', 'Александр', 'Иванович', '2002-04-25', '+79991112233', '@egorov_ai', 'egorov@mail.ru', 'https://github.com/egorov_ai'),
+(12, 'Тихонов', 'Максим', 'Романович', '2005-10-30', '+79992223344', '@tikhonov_mr', 'tikhonov@mail.ru', 'https://github.com/tikhonov_mr'),
+(13, 'Беляев', 'Артур', 'Васильевич', '2004-02-14', '+79993334455', '@belyaev_av', 'belyaev@mail.ru', 'https://github.com/belyaev_av'),
+(14, 'Громов', 'Константин', 'Семенович', '2003-06-05', '+79994445566', '@gromov_ks', 'gromov@mail.ru', 'https://github.com/gromov_ks'),
+(15, 'Зайцев', 'Степан', 'Павлович', '2001-08-29', '+79995556677', '@zaitsev_sp', 'zaitsev@mail.ru', 'https://github.com/zaitsev_sp'),
+(16, 'Павлов', 'Игорь', 'Денисович', '2002-12-11', '+79996667788', '@pavlov_id', 'pavlov@mail.ru', 'https://github.com/pavlov_id'),
+(17, 'Орлов', 'Роман', 'Григорьевич', '2003-03-03', '+79997778899', '@orlov_rg', 'orlov@mail.ru', 'https://github.com/orlov_rg'),
+(18, 'Соловьев', 'Петр', 'Олегович', '2004-07-27', '+79998889900', '@soloviev_po', 'soloviev@mail.ru', 'https://github.com/soloviev_po'),
+(19, 'Григорьев', 'Вячеслав', 'Федорович', '2005-05-17', '+79999990011', '@grigoryev_vf', 'grigoryev@mail.ru', 'https://github.com/grigoryev_vf'),
+(20, 'Крылов', 'Даниил', 'Михайлович', '2002-09-09', '+79990001122', '@krylov_dm', 'krylov@mail.ru', 'https://github.com/krylov_dm');

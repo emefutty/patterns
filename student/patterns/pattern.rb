@@ -43,8 +43,7 @@ class CoffeeWithMilk < CoffeePreparation
   end
 end
 
-# Использование шаблонного метода
-def client_code
+
   puts "Приготовление обычного кофе:"
   coffee = CoffeeWithHook.new
   coffee.prepare_coffee
@@ -52,6 +51,5 @@ def client_code
   puts "\nПриготовление кофе с молоком:"
   coffee_with_milk = CoffeeWithMilk.new
   coffee_with_milk.prepare_coffee
-end
 
 

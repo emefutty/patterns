@@ -146,14 +146,19 @@ student3=Student.new(
 # puts "Количество студентов: #{students.get_student_short_count}"
 
 
-json_strategy = JSONStrategy.new
-yaml_strategy = YAMLStrategy.new
+# json_strategy = JSONStrategy.new
+# yaml_strategy = YAMLStrategy.new
 
-# Читаем студентов из JSON
-students_list = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
-students_list.read
+# # Читаем студентов из JSON
+# students_list = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
+# students_list.read
 
-# Записываем студентов в YAML 
-yaml_strategy.write('./data/students.yaml', students_list.students)
+# # Записываем студентов в YAML 
+# yaml_strategy.write('./data/students.yaml', students_list.students)
 
-puts "Данные успешно сконвертированы из JSON в YAML!"
+# puts "Данные успешно сконвертированы из JSON в YAML!"
+
+
+require_relative './DB/DB_connection'
+connection = StudentsDBConection.connection
+puts "Connected to database: #{connection.db}"
