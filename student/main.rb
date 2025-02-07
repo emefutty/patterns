@@ -7,6 +7,8 @@ require_relative './lib/data_list'
 require_relative './lib/data_list_student_short'
 require_relative './student_list/students_list_json'
 require_relative './student_list/students_list_yaml'
+require_relative './student_list/strategy'
+require_relative './student_list/students_list'
 require 'json'
 require 'yaml'
 
@@ -62,35 +64,35 @@ student3=Student.new(
 
 
 
-testdata = DataTable.new([[1,2,3],[4,5,6]])
+# testdata = DataTable.new([[1,2,3],[4,5,6]])
 
-puts testdata.inspect
-puts testdata.rows_count
-puts testdata.columns_count
-puts testdata.get_element(1,2)
+# puts testdata.inspect
+# puts testdata.rows_count
+# puts testdata.columns_count
+# puts testdata.get_element(1,2)
 
-list = DataList.new([10, 20, 30])
-puts list.inspect 
-list.select(1)
-list.select(2)
-puts list.get_selected 
+# list = DataList.new([10, 20, 30])
+# puts list.inspect 
+# list.select(1)
+# list.select(2)
+# puts list.get_selected 
 
-student_short1 = StudentShort.from_student(student1)
+# student_short1 = StudentShort.from_student(student1)
 
 
-data_list = DataListStudentShort.new([student_short1])
+# data_list = DataListStudentShort.new([student_short1])
 
-puts "До замены данных:"
-puts data_list.get_names.join(", ")
-puts data_list.get_data.inspect
+# puts "До замены данных:"
+# puts data_list.get_names.join(", ")
+# puts data_list.get_data.inspect
 
-new_student_short1 = StudentShort.from_student(student3)
+# new_student_short1 = StudentShort.from_student(student3)
 
-new_data_list = DataListStudentShort.new([new_student_short1])
+# new_data_list = DataListStudentShort.new([new_student_short1])
 
-puts "\nПосле замены данных:"
-puts data_list.get_names.join(", ")
-puts new_data_list.get_data.inspect
+# puts "\nПосле замены данных:"
+# puts data_list.get_names.join(", ")
+# puts new_data_list.get_data.inspect
 
 
 
@@ -120,3 +122,38 @@ puts new_data_list.get_data.inspect
 # end
 
 # puts "Количество студентов: #{students_list.get_student_short_count}"
+
+
+# json_strategy = JSONStrategy.new
+# yaml_strategy = YAMLStrategy.new
+
+# students = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
+
+# students.read
+# puts "Список студентов с JSON:"
+
+# students.students.each { |student| puts student.to_s }
+# puts "Студент с id = 3: #{students.get_student_by_id(3)}"
+# puts "Количество студентов: #{students.get_student_short_count}"
+
+# students = StudentsList.new(filepath: './data/students.yaml', strategy: yaml_strategy)
+
+# students.read
+# puts "Список студентов с YAML:"
+
+# students.students.each { |student| puts student.to_s }
+# puts "Студент с id = 2: #{students.get_student_by_id(2)}"
+# puts "Количество студентов: #{students.get_student_short_count}"
+
+
+json_strategy = JSONStrategy.new
+yaml_strategy = YAMLStrategy.new
+
+# Читаем студентов из JSON
+students_list = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
+students_list.read
+
+# Записываем студентов в YAML 
+yaml_strategy.write('./data/students.yaml', students_list.students)
+
+puts "Данные успешно сконвертированы из JSON в YAML!"
