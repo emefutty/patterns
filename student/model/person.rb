@@ -13,8 +13,8 @@ class Person
 	end
 	
 	def self.valid_id?(id)
-		id.is_a?(Integer) && id > 0
-	end
+    	id.nil? || (id.is_a?(Integer) && id > 0)
+  	end
 
 	def git=(git)
 		raise ArgumentError, "Неверный формат гита" unless Person.valid_git?(git)

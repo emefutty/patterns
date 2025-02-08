@@ -19,6 +19,10 @@ class DataList
     @selected
   end
 
+  def get_objects  
+    @data
+  end
+
    def get_data
       index = 0
       data = []
