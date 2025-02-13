@@ -3,11 +3,14 @@ require_relative 'data_table'
 
 class DataListStudentShort < DataList
 
-  def get_names
+  private
+
+  def column_names
     ["№", "Фамилия И.О.", "git", "Контакт"]
   end
 
-  def get_objects_array(index, student_short)
-    [index, student_short.initials, student_short.git, student_short.contact]
+  def build_row(student_short)
+    [index + @offset, student_short.initials, student_short.git, student_short.contact]
   end
 end
+  

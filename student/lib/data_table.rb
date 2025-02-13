@@ -20,7 +20,7 @@ class DataTable
     @data[0].size
   end
 
-  def get_element(row,col)
+  def get_element(row, col)
     raise IndexError, "Неверный индекс строки" if row < 0 || row >= rows_count
     raise IndexError, "Неверный индекс столбца" if col < 0 || col >= columns_count
 

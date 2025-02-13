@@ -25,12 +25,11 @@ class StudentsListDB
     query = 'SELECT * FROM studentsDB ORDER BY id LIMIT $1 OFFSET $2'
     result = @db.execute_query(query, [n, start])
 
-   students_short = result.map do |row|
-  row.transform_keys!(&:to_sym)
-  row[:id] = row[:id].to_i  # Приведение id к Integer
-  StudentShort.from_student(Student.new(**row))
-end
-
+    students_short = result.map do |row|
+      row.transform_keys!(&:to_sym)
+      row[:id] = row[:id].to_i  # Приведение id к Integer
+      StudentShort.from_student(Student.new(**row))
+    end
 
     data_list ||= DataListStudentShort.new(students_short)
     data_list

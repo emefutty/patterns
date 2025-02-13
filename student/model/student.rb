@@ -2,6 +2,7 @@ require_relative 'person'
 require 'date'
 
 class Student < Person
+	
 	include Comparable
 	attr_reader :surname, :first_name, :patronymic, :birthdate, :phone, :telegram, :email
 
@@ -97,6 +98,15 @@ class Student < Person
 	def <=>(other)
 		birthdate <=> other.birthdate
 	end
+
+   def ==(other)
+    return false unless other.is_a?(Student)
+    
+    @telegram == other.telegram &&
+    @email == other.email &&
+    @phone == other.phone &&
+    @git == other.git
+  end
 
 	def to_s
 		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@patronymic}, Дата рождения: #{birthdate}, Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, GitHub: #{@git}"
