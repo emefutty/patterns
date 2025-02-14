@@ -1,10 +1,11 @@
 class DataList  
-  attr_reader :data, :column_names
+  attr_reader :data
   attr_accessor :selected
 
   def initialize(elements)
+    @column_names = column_names
     @data = elements
-    @selected = []
+    @selected=[]
   end
 
   def select(number)
@@ -15,7 +16,7 @@ class DataList
   end
 
   def get_selected
-    @selected
+    @selected.dup
   end
 
   def get_names
@@ -23,17 +24,18 @@ class DataList
   end
 
   def get_data
-    data = []
-    selected.each do |index|
-      obj = @data[index]
-      row = build_row(obj)
-      data << row
+    result = [self.get_names]
+    self.selected.each do |selected_index|
+      obj = self.data[selected_index]
+      row = build_row(obj) 
+      result << row
     end
-    DataTable.new(data)
+    DataTable.new(result)
   end
 
   def data=(data)
     @data = data
+    @selected = []
   end
 
   private
