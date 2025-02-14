@@ -2,6 +2,27 @@ require_relative 'data_list'
 require_relative 'data_table'
 
 class DataListStudentShort < DataList
+  attr_accessor :count
+    
+  def initialize(elements)
+      super(elements)
+      @observers = []
+  end
+
+  def add_observer(observer)
+      @observers << observer
+  end
+
+  def remove_observer(observer)
+      @observers.delete(observer)
+  end
+  
+  def notify
+      @observers.each do |observer|
+        observer.set_table_params(column_names, @count)
+        observer.set_table_data(get_data)
+      end
+  end
 
   private
 
@@ -10,7 +31,7 @@ class DataListStudentShort < DataList
   end
 
   def build_row(student_short)
-    [index + @offset, student_short.initials, student_short.git, student_short.contact]
+    [student_short.index, student_short.initials, student_short.git, student_short.contact]
   end
 end
   

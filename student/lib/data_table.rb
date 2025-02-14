@@ -17,6 +17,8 @@ class DataTable
   end
 
   def columns_count
+    return 0 if data.empty?
+    
     @data[0].size
   end
 

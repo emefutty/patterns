@@ -1,15 +1,17 @@
 class DataList  
-  attr_reader :data, :column_names, :selected
+  attr_reader :data, :column_names
+  attr_accessor :selected
 
-  def initialize(data)
-    self.data = data
+  def initialize(elements)
+    @data = elements
     @selected = []
   end
 
   def select(number)
-    raise ArgumentError, "Элемент по указанному номеру не существует" if @data[number].nil?
-    selected << number unless @selected.include?(number)
-    @data[number]
+    element = @data[number]
+    if element && !@selected.include?(element.id)
+      @selected << number
+    end
   end
 
   def get_selected
@@ -22,16 +24,15 @@ class DataList
 
   def get_data
     data = []
-    self.selected.each do |index|
+    selected.each do |index|
       obj = @data[index]
       row = build_row(obj)
-      data.append(row)
+      data << row
     end
     DataTable.new(data)
   end
 
   def data=(data)
-    raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
     @data = data
   end
 
