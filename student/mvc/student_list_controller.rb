@@ -1,3 +1,6 @@
+require_relative '../lib/data_list_student_short'
+require_relative '../DB/students_list_DB'
+
 class StudentListController
   def initialize(view, db_config)
     @view = view
@@ -9,7 +12,7 @@ class StudentListController
   def refresh_data
     @data_list_student_short.data = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).data
     @data_list_student_short.selected = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).selected
-    @data_list_student_short.count = @student_list.get_students_count  
+    @data_list_student_short.count = @student_list.get_students_count 
     @data_list_student_short.notify
   end
   

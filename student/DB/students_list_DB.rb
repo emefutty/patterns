@@ -37,6 +37,7 @@ class StudentsListDB
     end
 
     data_list ||= DataListStudentShort.new(students_short)
+    students_short.each_with_index { |_, index| data_list.select(index) }
     data_list
   end
 

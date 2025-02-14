@@ -3,6 +3,8 @@ include Fox
 
 require_relative 'student_list_view'
 require_relative 'student_list_controller'
+require_relative '../lib/data_list_student_short'
+require_relative '../DB/students_list_DB'
 
 begin
   db_config = {
