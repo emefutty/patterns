@@ -99,14 +99,14 @@ class Student < Person
 		birthdate <=> other.birthdate
 	end
 
-   def ==(other)
-    return false unless other.is_a?(Student)
+  	def ==(other)
+    	return false unless other.is_a?(Student)
     
-    @telegram == other.telegram &&
-    @email == other.email &&
-    @phone == other.phone &&
-    @git == other.git
-  end
+    	@telegram == other.telegram &&
+     	@email == other.email &&
+    	@phone == other.phone &&
+    	@git == other.git
+  	end
 
 	def to_s
 		"ID: #{@id}, ФИО: #{@surname} #{@first_name} #{@patronymic}, Дата рождения: #{birthdate}, Телефон: #{@phone}, Телеграм: #{@telegram}, Почта: #{@email}, GitHub: #{@git}"

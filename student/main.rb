@@ -48,117 +48,57 @@ student3=Student.new(
 	git:"https://github.com/git3"
 )
 
-# puts student1
-# student_short = StudentShort.from_student(student1) 
-# puts student_short
-# aa=StudentShort.from_string(1, "Иванов И.И., https://github.com/ivanov, +79999999999")
-# puts aa
 
-# tree = StudentTree.new
-# tree.insert(student1)
-# tree.insert(student2)
-# tree.insert(student3)
-
-# puts "\nДаты рождения студентов по возрастанию:"
-# tree.each { |student| puts student }
-
-
-
-# testdata = DataTable.new([[1,2,3],[4,5,6]])
-
-# puts testdata.inspect
-# puts testdata.rows_count
-# puts testdata.columns_count
-# puts testdata.get_element(1,2)
-
-# list = DataList.new([10, 20, 30])
-# puts list.inspect 
-# list.select(1)
-# list.select(2)
-# puts list.get_selected 
-
-# student_short1 = StudentShort.from_student(student1)
-
-
-# data_list = DataListStudentShort.new([student_short1])
-
-# puts "До замены данных:"
-# puts data_list.get_names.join(", ")
-# puts data_list.get_data.inspect
-
-# new_student_short1 = StudentShort.from_student(student3)
-
-# new_data_list = DataListStudentShort.new([new_student_short1])
-
-# puts "\nПосле замены данных:"
-# puts data_list.get_names.join(", ")
-# puts new_data_list.get_data.inspect
-
-
-
-# students_list = StudentsListYAML.new(filepath: './student_list/students.yaml')
-# students_list.read_from_file
-
-# if students_list.students.nil? || students_list.students.empty?
-# 	puts "Ошибка: данные не загружены или файл пуст."
-# else
-# 	puts "Данные успешно загружены."
-# end
-
-# if students_list.students.empty?
-# 	puts "Список студентов пуст."
-# else
-# 	puts "Все студенты:"
-# 	students_list.students.each { |student| puts student.to_s }
-# end
-
-# puts "Список студентов (с 2 по 3):"
-# student_short_list = students_list.get_k_n_student_short_list(2, 2)
-
-# students = student_short_list.get_data
-
-# for i in 0..(students.length - 1)
-# 	puts students[i].to_s
-# end
-
-# puts "Количество студентов: #{students_list.get_student_short_count}"
 
 
 # json_strategy = JSONStrategy.new
 # yaml_strategy = YAMLStrategy.new
 
-# students = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
-
-# students.read
-# puts "Список студентов с JSON:"
-
-# students.students.each { |student| puts student.to_s }
-# puts "Студент с id = 3: #{students.get_student_by_id(3)}"
-# puts "Количество студентов: #{students.get_student_short_count}"
-
-# students = StudentsList.new(filepath: './data/students.yaml', strategy: yaml_strategy)
-
-# students.read
-# puts "Список студентов с YAML:"
-
-# students.students.each { |student| puts student.to_s }
-# puts "Студент с id = 2: #{students.get_student_by_id(2)}"
-# puts "Количество студентов: #{students.get_student_short_count}"
-
-
-# json_strategy = JSONStrategy.new
-# yaml_strategy = YAMLStrategy.new
-
-# # Читаем студентов из JSON
 # students_list = StudentsList.new(filepath: './data/students.json', strategy: json_strategy)
 # students_list.read
 
-# # Записываем студентов в YAML 
 # yaml_strategy.write('./data/students.yaml', students_list.students)
 
-# puts "Данные успешно сконвертированы из JSON в YAML!"
+
+# прочитать из json в yaml
+# filepath1 = 'data/students.json'
+# strategy1 = JSONStrategy.new
+
+# students_list = StudentsList.new(filepath: filepath1, strategy: strategy1)
+# students_list.read
+
+# filepath2 = 'data/students.yaml'
+# strategy2 = YAMLStrategy.new
+
+# students_list_yaml = StudentsList.new(filepath: filepath2, strategy: strategy2)
+# students_list_yaml.students = students_list.students
+# students_list_yaml.write
+
+# puts "Студенты записаны в YAML: #{filepath2}"
 
 
-require_relative './DB/DB_connection'
-connection = StudentsDBConection.connection
-puts "Connected to database: #{connection.db}"
+# input_file_path = 'data/students.json'
+# output_file_path = 'data/students.yaml'
+
+
+# list = StudentsList.new(JSONStrategy.new)
+# list.read(input_file_path)
+
+
+# list.strategy = YAMLStrategy.new
+# list.write(output_file_path)
+
+
+filepath1 = './student_list/students_list_json'
+strategy1 = JSONStrategy.new
+
+students_list = StudentsList.new(filepath: filepath1, strategy: strategy1)
+students_list.read
+filepath2 = './student_list/students_list_yaml'
+strategy2 = YAMLStrategy.new
+
+students_list_yaml = StudentsList.new(filepath2, strategy2)
+students_list_yaml.send(:students=, students_list.get_students)
+students_list_yaml.save_students
+
+puts "Студенты записаны в YAML: #{filepath2}"

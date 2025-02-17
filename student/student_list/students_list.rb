@@ -6,7 +6,7 @@ require_relative '../student_list/students_list_json'
 require_relative '../student_list/students_list_yaml'
 
 class StudentsList
-  attr_reader :students
+  attr_reader :students, :strategy
 
   def initialize(filepath:, strategy:)
     @filepath = filepath
@@ -14,19 +14,12 @@ class StudentsList
     self.students = []
   end
 
-  def students=(students)
-    unless students.nil? || students.is_a?(Array) 
-      raise ArgumentError, "Неверный тип данных"
-    end
-    @students = students
-  end
-
   def read
-    self.students = @strategy.read(@filepath)
+    @students = @strategy.read(@filepath)
   end
 
   def write
-    @strategy.write(@filepath, self.students)
+    @strategy.write(@filepath, @students)
   end
 
   def get_student_by_id(id)
@@ -57,13 +50,13 @@ class StudentsList
 
     new_id = self.students.empty? ? 1 : self.students.map(&:id).max + 1
     student_with_new_id = Student.new(
-      surname: student.second_name,
+      surname: student.surname,
       first_name: student.first_name,
       patronymic: student.patronymic,
       id: new_id,
       git: student.git,
       birthdate: student.birthdate,
-      phone: student.phone_number,
+      phone: student.phone,
       email: student.email,
       telegram: student.telegram
     )
@@ -89,4 +82,43 @@ class StudentsList
   def get_student_short_count
     self.students.count
   end
+
+  def change_strategy(new_strategy, new_file_path)
+    raise ArgumentError, "Неверная стратегия" unless new_strategy.is_a?(Strategy)
+    self.strategy = new_strategy  
+    self.filepath = new_file_path
+  end
+
+  private
+
+  def strategy=(new_strategy)
+    raise ArgumentError, "Неверная стратегия" unless new_strategy.is_a?(Strategy)
+    @strategy = new_strategy
+  end
+
+  def filepath=(new_file_path)
+    raise ArgumentError, "Некорректный путь к файлу" unless new_file_path.is_a?(String) && !new_file_path.empty?
+    @filepath = new_file_path
+  end
+
+  def students=(students)
+    unless students.nil? || students.is_a?(Array) 
+      raise ArgumentError, "Неверный тип данных"
+    end
+    @students = students
+  end
+
 end
+
+
+filepath1 = '../data/students.json'
+filepath2 = '../data/students.yaml'
+
+students_list = StudentsList.new(filepath: filepath1, strategy: JSONStrategy.new())
+puts students_list.read
+
+students_list.change_strategy(YAMLStrategy.new, filepath2)
+students_list.write
+
+puts "Студенты записаны в YAML"
+
