@@ -32,12 +32,15 @@ class StudentListView < FXMainWindow
   end
 
   def set_table_data(data_table)
+    puts "📌 View перед установкой данных: #{data_table.rows_count} студентов"
+
     @table.setTableSize(data_table.rows_count, data_table.columns_count)
     (0...data_table.rows_count).each do |row_index|
       (0...data_table.columns_count).each do |col_index|
         @table.setItemText(row_index, col_index, data_table.get_element(row_index, col_index).to_s)
       end
     end
+
     adjust_column_widths
   end
 

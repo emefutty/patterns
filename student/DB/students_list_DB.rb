@@ -24,20 +24,14 @@ class StudentsListDB
     start = (k - 1) * n
     query = 'SELECT * FROM studentsdb ORDER BY id LIMIT $1 OFFSET $2'
     result = @db.execute_query(query, [n, start])
-    
-    students_short = result.map do |row|
+
+    students_short = result.map(&:to_h).map do |row|
       row.transform_keys!(&:to_sym)
-      row[:id] = row[:id].to_i  # Приведение id к Integer
-      begin
-        StudentShort.from_student(Student.new(**row))
-      rescue => e
-        puts "❌ Ошибка при создании StudentShort: #{e.message}"
-        nil
-      end
+      row[:id] = row[:id].to_i if row[:id]
+      StudentShort.from_student(Student.new(**row))
     end
 
     data_list ||= DataListStudentShort.new(students_short)
-    students_short.each_with_index { |_, index| data_list.select(index) }
     data_list
   end
 

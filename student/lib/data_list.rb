@@ -25,13 +25,16 @@ class DataList
 
   def get_data
     result = [self.get_names]
-    self.selected.each do |selected_index|
-      obj = self.data[selected_index]
-      row = build_row(obj) 
+    
+    self.data.each do |obj| # ✅ Вместо `selected` проходим по всем студентам
+      row = build_row(obj)
       result << row
     end
+
+    puts "📌 Итоговое количество студентов в DataTable: #{result.size - 1}" # Отладка
     DataTable.new(result)
   end
+
 
   def data=(data)
     @data = data

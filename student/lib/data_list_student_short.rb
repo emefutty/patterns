@@ -24,6 +24,11 @@ class DataListStudentShort < DataList
       end
   end
 
+   def get_student_short_count
+      puts "📌 Вызван get_student_short_count, возвращаем: #{@data.size}"
+      @data.size
+    end
+
   private
 
   def column_names

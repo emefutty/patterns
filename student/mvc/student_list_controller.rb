@@ -9,10 +9,15 @@ class StudentListController
     @data_list_student_short.add_observer(@view)
   end
 
-  def refresh_data
-    @data_list_student_short.data = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).data
-    @data_list_student_short.selected = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page).selected
+ def refresh_data
+    data_list = @student_list.get_k_n_student_short_list(@view.current_page, @view.items_per_page)
+
+    puts "📌 Контроллер передаёт в View: #{data_list.get_student_short_count} студентов" # Отладка
+
+    @data_list_student_short.data = data_list.data
+    @data_list_student_short.selected = data_list.selected
     @data_list_student_short.count = @student_list.get_students_count 
+    
     @data_list_student_short.notify
   end
   
